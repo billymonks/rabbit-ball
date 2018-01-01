@@ -81,6 +81,7 @@ namespace UnityStandardAssets.CinematicEffects
 
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
+                // TODO: Hardcoded variable names, rewrite this function
                 if (property.type != "ChannelMixerSettings")
                     return;
 
@@ -243,17 +244,11 @@ namespace UnityStandardAssets.CinematicEffects
 
         private void SetLUTImportSettings(TextureImporter importer)
         {
-#if UNITY_5_5_OR_NEWER
             importer.textureType = TextureImporterType.Default;
-            importer.sRGBTexture = false;
-            importer.textureCompression = TextureImporterCompression.Uncompressed;
-#else
-            importer.textureType = TextureImporterType.Advanced;
-            importer.linearTexture = true;
-            importer.textureFormat = TextureImporterFormat.RGB24;
-#endif
             importer.anisoLevel = 0;
             importer.mipmapEnabled = false;
+            importer.linearTexture = true;
+            importer.textureFormat = TextureImporterFormat.RGB24;
             importer.SaveAndReimport();
         }
 
@@ -282,7 +277,7 @@ namespace UnityStandardAssets.CinematicEffects
                                 field.propertyType == SerializedPropertyType.AnimationCurve &&
                                 concreteTarget.tonemapping.tonemapper != TonemappingColorGrading.Tonemapper.Curve)
                                 continue;
-
+                            
                             // Special case for the neutral tonemapper
                             bool neutralParam = field.name.StartsWith("neutral");
 
@@ -369,18 +364,10 @@ namespace UnityStandardAssets.CinematicEffects
                 {
                     // Checks import settings on the lut, offers to fix them if invalid
                     TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(concreteTarget.lut.texture));
-
-#if UNITY_5_5_OR_NEWER
-                    bool valid = importer.anisoLevel == 0
-                        && importer.mipmapEnabled == false
-                        && importer.sRGBTexture == false
-                        && (importer.textureCompression == TextureImporterCompression.Uncompressed);
-#else
                     bool valid = importer.anisoLevel == 0
                         && importer.mipmapEnabled == false
                         && importer.linearTexture == true
                         && (importer.textureFormat == TextureImporterFormat.RGB24 || importer.textureFormat == TextureImporterFormat.AutomaticTruecolor);
-#endif
 
                     if (!valid)
                     {

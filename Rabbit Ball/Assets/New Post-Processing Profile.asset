@@ -29,7 +29,7 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 0
       fxaaSettings:
@@ -40,7 +40,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       intensity: 1
       radius: 0.3
@@ -50,7 +50,7 @@ MonoBehaviour:
       ambientOnly: 0
       highPrecision: 0
   screenSpaceReflection:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       reflection:
         blendType: 0
@@ -69,18 +69,18 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
-    m_Settings:
-      focusDistance: 10
-      aperture: 5.6
-      focalLength: 122
-      useCameraFov: 0
-      kernelSize: 1
-  motionBlur:
     m_Enabled: 1
     m_Settings:
-      shutterAngle: 270
-      sampleCount: 10
+      focusDistance: 10.65
+      aperture: 21.6
+      focalLength: 210.8
+      useCameraFov: 0
+      kernelSize: 3
+  motionBlur:
+    m_Enabled: 0
+    m_Settings:
+      shutterAngle: 360
+      sampleCount: 24
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
       lowPercent: 45
       highPercent: 95
       minLuminance: -5
-      maxLuminance: 1
+      maxLuminance: -2.67
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
@@ -100,13 +100,13 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.5
-        threshold: 1.1
-        softKnee: 0.5
-        radius: 4
-        antiFlicker: 0
+        intensity: 0.48
+        threshold: 2.15
+        softKnee: 0.46
+        radius: 2.87
+        antiFlicker: 1
       lensDirt:
-        texture: {fileID: 0}
+        texture: {fileID: 2800000, guid: 69e847bbff1cf5449a4ee0bbd045dbc9, type: 3}
         intensity: 3
   colorGrading:
     m_Enabled: 1
@@ -284,13 +284,13 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 1
   grain:
     m_Enabled: 0
     m_Settings:
       colored: 1
-      intensity: 0.5
-      size: 1
+      intensity: 0.275
+      size: 0.986
       luminanceContribution: 0.8
   vignette:
     m_Enabled: 0

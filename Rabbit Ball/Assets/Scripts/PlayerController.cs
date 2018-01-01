@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	public RectTransform powerMeter;
-	private float maxMeterHeight;
-
 	private int state = 0;
 
 	public Vector3 forwardValue;
@@ -13,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 prevPos;
 
 	private Rigidbody rb;
+
+    private Collider c;
 
 	public float cameraTurnSpeed = 5f;
 
@@ -24,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float groundActionLength = 3f;
 	public float airActionLength = 3f;
-
+    private float hopPower = 0f;
 	private float groundActionTimer = 0f;
 	private float airActionTimer = 0f;
 	private bool groundAction = false, airAction = false, groundActionReady = false, airActionReady = false;
@@ -34,36 +33,41 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 startPos = Vector3.zero;
 
+    public PhysicMaterial slippery, frictiony;
+
+    public GameObject body;
+
+    public float slowRotation = 0.5f, fastRotation = 3f;
+
+    private Transform transform;
+    private bool grounded = false;
+    private float rotationSpeed = 1f;
 	// Use this for initialization
 	void Start () {
-		maxMeterHeight = powerMeter.rect.height;
+        transform = body.transform;
 		prevPos = transform.position;
 		forwardValue = transform.forward;
 
 		startPos = transform.position;
 
-		rb = GetComponent<Rigidbody> ();
+		rb = body.GetComponent<Rigidbody> ();
+        c = body.GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		powerMeter.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, maxMeterHeight * (hitPower / maxHitPower)); 
+        Ray r = new Ray(transform.position, -transform.up * 2f);
+        RaycastHit hit;
+        if (Physics.Raycast(r, out hit, 2f))
+        {
+            grounded = true;
+        } else
+        {
+            grounded = false;
+        }
+
 		if (state == 0) {
-			if (Input.GetKey (KeyCode.W)) {
-				hitPower += chargeSpeed;
-				hitPower = Mathf.Min (hitPower, maxHitPower);
-			} else if (hitPower > 0) {
-				hitPower = Mathf.Min (hitPower, maxHitPower);
-				BeginRolling ();
-			} else {
-				float rotation = 0f;
-				if (Input.GetKey (KeyCode.A))
-					rotation -= 1f;
-				if (Input.GetKey (KeyCode.D))
-					rotation += 1f;
-				transform.Rotate (new Vector3 (0f, rotation, 0f));
-				forwardValue = transform.forward;
-			}
+            BeginRolling();
 		} else if (state == 1) {
 			UpdateForwardFromMovement ();
 
@@ -73,31 +77,35 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
-			if (rb.velocity.magnitude < 1 && rb.angularVelocity.magnitude < 1) {
-				stoppedTimer -= Time.deltaTime;
-				if(stoppedTimer <= 0f)
-					EndRolling ();
-			} else {
-				stoppedTimer = stoppedLength;
-
 				if (groundAction)
 					DoGroundAction ();
-			}
-		}
+                else
+                    transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 10f);
+        }
 	}
 
 	private void UpdateForwardFromMovement() {
-		if ((transform.position - prevPos).magnitude > 1) {
+        float rotation = 0f;
+        if (Input.GetKey(KeyCode.A))
+            rotation -= rotationSpeed;
+        if (Input.GetKey(KeyCode.D))
+            rotation += rotationSpeed;
+        rb.velocity = Quaternion.AngleAxis(rotation, transform.up) * rb.velocity;
+
+        if ((transform.position - prevPos).magnitude > 1) {
 			forwardValue = Vector3.Lerp(forwardValue, 
 				(transform.position - prevPos).normalized, 
 				cameraTurnSpeed * Time.deltaTime);
 
+            forwardValue = Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue;
 
+            prevPos = transform.position;
+		} else
+        {
+            forwardValue = Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue;
+        }
 
-			prevPos = transform.position;
-		}
-
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation (forwardValue), Time.deltaTime * 2f);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation (forwardValue), Time.deltaTime * 5f);
 	}
 
 	private void BeginRolling() {
@@ -124,21 +132,42 @@ public class PlayerController : MonoBehaviour {
 		groundAction = true;
 		groundActionReady = false;
 		groundActionTimer = groundActionLength;
-	}
+        hopPower = 0f;
+        c.material = frictiony;
+        rotationSpeed = fastRotation;
+    }
 
 	private void DoGroundAction() {
 		groundActionTimer -= Time.deltaTime;
 
-		rb.AddForce(forwardValue * actionRunSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
+        hopPower += Time.deltaTime;
 
-		if (groundActionTimer <= 0f || !Input.GetKey (KeyCode.W))
+        if (grounded)
+            rotationSpeed = fastRotation;
+        else {
+            rotationSpeed = slowRotation;
+            rb.AddForce(Vector3.down * Time.deltaTime * 4f, ForceMode.Impulse);
+        }
+            
+
+        if (!Input.GetKey (KeyCode.W))
 			EndGroundAction ();
 	}
 
 	private void EndGroundAction() {
 		groundActionTimer = 0f;
 		groundAction = false;
-		rb.AddForce (Vector3.up * actionJumpPower, ForceMode.Impulse);
+        groundActionReady = true;
+        
+        c.material = slippery;
+        rotationSpeed = slowRotation;
+
+        if (grounded)
+        {
+            rb.AddForce((transform.up + transform.forward).normalized * (actionJumpPower * Mathf.Min(hopPower, 1f)), ForceMode.Impulse);
+        }
+        
 	}
 
 	void OnCollisionEnter(Collision c) {
