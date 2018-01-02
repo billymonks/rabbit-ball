@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 
     public Transform cameraRigTransform;
     private float cameraRotationX, cameraRotationY;
+
+	public float mouseSpeed = 1f;
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -63,8 +65,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        cameraRotationY += Input.GetAxis("Mouse X");
-        cameraRigTransform.RotateAround(body.transform.position, Vector3.up, Input.GetAxis("Mouse X"));
+		float turnAmount = 0;
+		turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed;
+		cameraRotationY += turnAmount;
+		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
