@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour {
     private Transform transform;
     private bool grounded = false;
     private float rotationSpeed = 1f;
+
+    public Transform cameraRigTransform;
+    private float cameraRotationX, cameraRotationY;
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -52,26 +55,35 @@ public class PlayerController : MonoBehaviour {
 
 		rb = body.GetComponent<Rigidbody> ();
         c = body.GetComponent<Collider>();
-	}
+
+        cameraRotationX = cameraRigTransform.eulerAngles.x;
+        cameraRotationY = cameraRigTransform.eulerAngles.y;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        Ray r = new Ray(transform.position, -transform.up * 2f);
+        cameraRotationY += Input.GetAxis("Mouse X");
+        cameraRigTransform.RotateAround(body.transform.position, Vector3.up, Input.GetAxis("Mouse X"));
+
+        Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
-        if (Physics.Raycast(r, out hit, 2f))
+        if (Physics.Raycast(r, out hit, 1f))
         {
             grounded = true;
+            rotationSpeed = fastRotation;
         } else
         {
             grounded = false;
+            rotationSpeed = slowRotation;
         }
 
-		if (state == 0) {
+        if (state == 0) {
             BeginRolling();
 		} else if (state == 1) {
 			UpdateForwardFromMovement ();
 
-			if (Input.GetKey (KeyCode.W)) {
+			if (Input.GetKey (KeyCode.Space)) {
 				if (groundActionReady) {
 					BeginGroundAction ();
 				}
@@ -85,11 +97,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void UpdateForwardFromMovement() {
-        float rotation = 0f;
-        if (Input.GetKey(KeyCode.A))
-            rotation -= rotationSpeed;
-        if (Input.GetKey(KeyCode.D))
-            rotation += rotationSpeed;
+        float yRotation = transform.eulerAngles.y;
+
+        float rotation = Mathf.Clamp(Vector3.SignedAngle(Quaternion.Euler(0f, yRotation, 0f) * Vector3.forward, Quaternion.Euler(0f, cameraRotationY, 0f) * Vector3.forward, Vector3.up), -rotationSpeed, rotationSpeed);
+
         rb.velocity = Quaternion.AngleAxis(rotation, transform.up) * rb.velocity;
 
         if ((transform.position - prevPos).magnitude > 1) {
@@ -134,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		groundActionTimer = groundActionLength;
         hopPower = 0f;
         c.material = frictiony;
-        rotationSpeed = fastRotation;
+        //rotationSpeed = fastRotation;
     }
 
 	private void DoGroundAction() {
@@ -144,14 +155,17 @@ public class PlayerController : MonoBehaviour {
         hopPower += Time.deltaTime;
 
         if (grounded)
-            rotationSpeed = fastRotation;
-        else {
-            rotationSpeed = slowRotation;
+        {
+            //rotationSpeed = fastRotation;
+        }
+        else
+        {
+            //rotationSpeed = slowRotation;
             rb.AddForce(Vector3.down * Time.deltaTime * 4f, ForceMode.Impulse);
         }
             
 
-        if (!Input.GetKey (KeyCode.W))
+        if (!Input.GetKey (KeyCode.Space))
 			EndGroundAction ();
 	}
 
@@ -161,7 +175,7 @@ public class PlayerController : MonoBehaviour {
         groundActionReady = true;
         
         c.material = slippery;
-        rotationSpeed = slowRotation;
+        //rotationSpeed = slowRotation;
 
         if (grounded)
         {

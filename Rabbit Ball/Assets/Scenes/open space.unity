@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ab675e6698bde46fd87143fb0d7580cb, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a4eff5ee7a37443efaca484d2f3ec385, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.089121245, g: 0.28205514, b: 0.4861253, a: 1}
+  m_IndirectSpecularColor: {r: 0.4885059, g: 0.69733596, b: 0.91551626, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -597,7 +597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4939621323562926, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.0012426
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 4939621323562926, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -622,6 +622,11 @@ Prefab:
     - target: {fileID: 4939621323562926, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114903344137375930, guid: 9e688c2927f66534889990fbd57980bc,
+        type: 2}
+      propertyPath: fastRotation
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
@@ -1345,6 +1350,10 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 2053035432}
+    - target: {fileID: 1531915840004510, guid: 4b1bd1513ac080441bb11058a0cc915f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b1bd1513ac080441bb11058a0cc915f, type: 2}
   m_IsPrefabParent: 0
@@ -9084,7 +9093,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0.627451, g: 0.7490196, b: 0.77647066, a: 1}
+  m_Color: {r: 0.81568635, g: 0.81568635, b: 0.81568635, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
