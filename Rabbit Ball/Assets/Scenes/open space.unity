@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 49349566}
   m_Layer: 0
   m_Name: Cylinder (10)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -390,7 +390,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2749560
+  m_Name: pb_Mesh280728
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -623,12 +623,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114903344137375930, guid: 9e688c2927f66534889990fbd57980bc,
-        type: 2}
-      propertyPath: fastRotation
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114903344137375930, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9e688c2927f66534889990fbd57980bc, type: 2}
   m_IsPrefabParent: 0
 --- !u!43 &137589186
@@ -636,7 +632,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2730748
+  m_Name: pb_Mesh280742
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1044,7 +1040,7 @@ GameObject:
   - component: {fileID: 178505358}
   m_Layer: 0
   m_Name: Cylinder (2)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -1618,7 +1614,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh64858
+  m_Name: pb_Mesh280328
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1945,7 +1941,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2712298
+  m_Name: pb_Mesh280582
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -2457,7 +2453,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2216088
+  m_Name: pb_Mesh281388
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -2595,7 +2591,7 @@ GameObject:
   - component: {fileID: 392195608}
   m_Layer: 0
   m_Name: Cylinder (13)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -3332,7 +3328,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2779512
+  m_Name: pb_Mesh281372
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3598,7 +3594,7 @@ GameObject:
   - component: {fileID: 547025076}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -3894,7 +3890,7 @@ GameObject:
   - component: {fileID: 559521164}
   m_Layer: 0
   m_Name: Cylinder (18)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -4171,7 +4167,7 @@ GameObject:
   - component: {fileID: 560107276}
   m_Layer: 0
   m_Name: Cylinder (17)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -4448,7 +4444,7 @@ GameObject:
   - component: {fileID: 577138920}
   m_Layer: 0
   m_Name: Cylinder (12)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -4734,7 +4730,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh65120
+  m_Name: pb_Mesh281656
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -5256,7 +5252,7 @@ GameObject:
   - component: {fileID: 673609077}
   m_Layer: 0
   m_Name: Cylinder (7)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -5926,7 +5922,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh65008
+  m_Name: pb_Mesh281170
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6637,7 +6633,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh65134
+  m_Name: pb_Mesh281670
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6903,7 +6899,7 @@ GameObject:
   - component: {fileID: 854237923}
   m_Layer: 0
   m_Name: Cylinder (16)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -7180,7 +7176,7 @@ GameObject:
   - component: {fileID: 888162414}
   m_Layer: 0
   m_Name: Cylinder (14)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -7466,7 +7462,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2695286
+  m_Name: pb_Mesh280756
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -7850,7 +7846,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2647420
+  m_Name: pb_Mesh281230
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -8433,7 +8429,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2771346
+  m_Name: pb_Mesh281764
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -8817,7 +8813,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2721542
+  m_Name: pb_Mesh280940
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -9148,7 +9144,7 @@ GameObject:
   - component: {fileID: 1180818559}
   m_Layer: 0
   m_Name: Cylinder (8)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -10182,12 +10178,17 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!4 &1244662216 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4953273533668508, guid: 9e688c2927f66534889990fbd57980bc,
+    type: 2}
+  m_PrefabInternal: {fileID: 114829458}
 --- !u!43 &1260110345
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2714450
+  m_Name: pb_Mesh280966
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -10453,7 +10454,7 @@ GameObject:
   - component: {fileID: 1269356865}
   m_Layer: 0
   m_Name: Cylinder (11)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -10739,7 +10740,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh65106
+  m_Name: pb_Mesh281642
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11123,7 +11124,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2076160
+  m_Name: pb_Mesh281684
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11379,7 +11380,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2717514
+  m_Name: pb_Mesh281862
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11517,7 +11518,7 @@ GameObject:
   - component: {fileID: 1411258813}
   m_Layer: 0
   m_Name: Cylinder (19)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -11855,7 +11856,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2755532
+  m_Name: pb_Mesh281314
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12182,7 +12183,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2074570
+  m_Name: pb_Mesh280402
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12310,7 +12311,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh65162
+  m_Name: pb_Mesh281728
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12960,7 +12961,7 @@ GameObject:
   - component: {fileID: 1507439599}
   m_Layer: 0
   m_Name: Cylinder (21)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -13246,7 +13247,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh64948
+  m_Name: pb_Mesh280854
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -13384,7 +13385,7 @@ GameObject:
   - component: {fileID: 1528650525}
   m_Layer: 0
   m_Name: Cylinder (4)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -14618,7 +14619,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh64926
+  m_Name: pb_Mesh280704
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -15268,7 +15269,7 @@ GameObject:
   - component: {fileID: 1911487653}
   m_Layer: 0
   m_Name: Cylinder (9)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -15564,7 +15565,7 @@ GameObject:
   - component: {fileID: 1919167761}
   m_Layer: 0
   m_Name: Cylinder (5)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -15841,7 +15842,7 @@ GameObject:
   - component: {fileID: 1931567704}
   m_Layer: 0
   m_Name: Cylinder (6)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -16118,7 +16119,7 @@ GameObject:
   - component: {fileID: 1936776284}
   m_Layer: 0
   m_Name: Cylinder (3)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -16395,7 +16396,7 @@ GameObject:
   - component: {fileID: 1999546227}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -16999,7 +17000,7 @@ GameObject:
   - component: {fileID: 2033292872}
   m_Layer: 0
   m_Name: Cylinder (20)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126
@@ -17266,6 +17267,31 @@ GameObject:
   m_PrefabParentObject: {fileID: 1418887353559852, guid: 9e688c2927f66534889990fbd57980bc,
     type: 2}
   m_PrefabInternal: {fileID: 114829458}
+--- !u!114 &2053035433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2053035432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a1e8f6e64194c178a78ec9a10fed23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardValue: {x: 0, y: 0, z: 0}
+  cameraTurnSpeed: 10
+  powerMultiplier: 0.2
+  groundActionLength: 5
+  airActionLength: 5
+  actionRunSpeed: 5
+  actionJumpPower: 18
+  slippery: {fileID: 13400000, guid: 26712ea655e024697a093d165c7861af, type: 2}
+  frictiony: {fileID: 13400000, guid: 51833f0d9ecb56e4787a709461fb32ea, type: 2}
+  body: {fileID: 2053035432}
+  slowRotation: 1
+  fastRotation: 7
+  cameraRigTransform: {fileID: 1244662216}
+  mouseSpeed: 1
 --- !u!43 &2063791930
 Mesh:
   m_ObjectHideFlags: 0
@@ -17665,7 +17691,7 @@ GameObject:
   - component: {fileID: 2146724464}
   m_Layer: 0
   m_Name: Cylinder (15)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 126

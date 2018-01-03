@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour {
     private float cameraRotationX, cameraRotationY;
 
 	public float mouseSpeed = 1f;
+
+    private List<ContactPoint> contacts = new List<ContactPoint>();
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
-        if (Physics.Raycast(r, out hit, 1f))
+        if (Physics.Raycast(r, out hit, 0.7f))
         {
             grounded = true;
             rotationSpeed = fastRotation;
@@ -80,6 +82,15 @@ public class PlayerController : MonoBehaviour {
         {
             grounded = false;
             rotationSpeed = slowRotation;
+
+            Ray down = new Ray(transform.position, -Vector3.up * 1f);
+
+            if (Physics.Raycast(down, out hit, 0.7f))
+            {
+                grounded = true;
+                //rotationSpeed = fastRotation;
+                transform.eulerAngles = new Vector3( Mathf.Lerp(transform.eulerAngles.x, 0, Time.deltaTime * 4f), transform.eulerAngles.y, transform.eulerAngles.z);
+            }
         }
 
         if (state == 0) {
@@ -194,5 +205,27 @@ public class PlayerController : MonoBehaviour {
 			rb.velocity = Vector3.zero;
 			rb.angularVelocity = Vector3.zero;
 		}
-	}
+
+        if (c.collider.gameObject.CompareTag("Environment"))
+        {
+            //foreach(ContactPoint cp in c.contacts)
+            //contacts.Add(cp);
+            if (!grounded)
+            {
+                //Vector3.
+                //c.contacts[0].normal
+                //Quaternion.
+                //transform.rotation = transform.rotation * Quaternion.FromToRotation(transform.up, c.contacts[0].normal);
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision c)
+    {
+        //if (c.collider.gameObject.CompareTag("Environment"))
+        //{
+            //foreach (ContactPoint cp in c.contacts)
+                //contacts.Remove(cp);
+        //}
+    }
 }

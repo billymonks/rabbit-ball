@@ -21,10 +21,11 @@ public class GameCameraController : MonoBehaviour {
 			//transform.LookAt (target.transform);
 			transform.position = Vector3.Lerp(transform.position, target.transform.position - ((target.transform.forward + transform.forward) /2f) * targetDistance + Vector3.up * 4f, Time.deltaTime * followSpeed);
             Plane xz = new Plane(transform.right, transform.position);
-            Vector3 targetPoint = target.transform.position + target.transform.forward * (rb.velocity.magnitude / 10f) + Vector3.up * 2f;
+            Vector3 targetPoint = target.transform.position + target.transform.forward * (rb.velocity.magnitude / 4f) + Vector3.up * 2f;
             float distance = xz.GetDistanceToPoint(targetPoint);
             transform.position += transform.right * distance;
             transform.LookAt(targetPoint);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPoint - transform.position, Vector3.up), Time.deltaTime * 8f);
             //transform.position = Vector3.Lerp(transform.position, target.transform.position - transform.forward * targetDistance + Vector3.up * 4f, Time.deltaTime * followSpeed);
 
             RaycastHit hit;
