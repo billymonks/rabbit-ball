@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour {
 	public float mouseSpeed = 1f;
 
     private List<ContactPoint> contacts = new List<ContactPoint>();
+
+    private float jumpTimer;
+    private float jumpValidTime = 0.4f;
+
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -63,6 +67,7 @@ public class PlayerController : MonoBehaviour {
         cameraRotationX = cameraRigTransform.eulerAngles.x;
         cameraRotationY = cameraRigTransform.eulerAngles.y;
 
+        jumpTimer = jumpValidTime;
     }
 	
 	// Update is called once per frame
@@ -160,11 +165,13 @@ public class PlayerController : MonoBehaviour {
 		groundActionTimer = groundActionLength;
         hopPower = 0f;
         c.material = frictiony;
+        jumpTimer = jumpValidTime;
         //rotationSpeed = fastRotation;
     }
 
 	private void DoGroundAction() {
 		groundActionTimer -= Time.deltaTime;
+        jumpTimer -= Time.deltaTime;
 
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
         hopPower += Time.deltaTime;
@@ -192,7 +199,7 @@ public class PlayerController : MonoBehaviour {
         c.material = slippery;
         //rotationSpeed = slowRotation;
 
-        if (grounded)
+        if (grounded && jumpTimer <= 0f)
         {
             rb.AddForce((transform.up + transform.forward).normalized * (actionJumpPower * Mathf.Min(hopPower, 1f)), ForceMode.Impulse);
         }

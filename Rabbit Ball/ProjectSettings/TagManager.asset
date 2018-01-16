@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boundary
   - Environment
+  - Water
   layers:
   - Default
   - TransparentFX
