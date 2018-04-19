@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameCameraController : MonoBehaviour {
 	private bool lookAtTarget = true, followTarget = true;
 
-	public GameObject target;
+	public PlayerController target;
     private Rigidbody rb;
 	public float targetDistance = 10f;
 	public float followSpeed = 10f;
@@ -29,14 +29,14 @@ public class GameCameraController : MonoBehaviour {
 
             Vector3 lookAtVector = (target.transform.position - transform.position).normalized;
             //transform.LookAt (target.transform);
-            Vector3 destinationPos = target.transform.position - ((target.transform.forward + transform.forward) / 2f) * targetDistance + Vector3.up * yHeight;
+            Vector3 destinationPos = target.transform.position - ((target.forwardValue + transform.forward) / 2f) * targetDistance + Vector3.up * yHeight;
 
             float distanceFromTarget = Vector3.Distance(transform.position, destinationPos);
             float cameraMovementSpeed = (distanceFromTarget / speedScaler) * followSpeed;
 
             transform.position = Vector3.Lerp(transform.position, destinationPos, Time.deltaTime * cameraMovementSpeed);
             Plane xz = new Plane(transform.right, transform.position);
-            Vector3 targetPoint = target.transform.position + target.transform.forward * (rb.velocity.magnitude / 4f) + Vector3.up * 2f;
+            Vector3 targetPoint = target.transform.position + target.forwardValue * (rb.velocity.magnitude / 4f) + Vector3.up * 2f;
             float distance = xz.GetDistanceToPoint(targetPoint);
             transform.position += transform.right * distance;
             

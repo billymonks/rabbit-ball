@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour {
     private float jumpTimer;
     private float jumpValidTime = 0.4f;
 
+    public ParticleSystem jumpParticles;
+
+    private float xRotation = 0f;
+
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -133,11 +137,17 @@ public class PlayerController : MonoBehaviour {
             prevPos = transform.position;
 		} else
         {
+            xRotation = 0f;
             forwardValue = Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue;
+
         }
 
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation (forwardValue), Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation (forwardValue) * Quaternion.Euler(xRotation, 0f, 0f), Time.deltaTime * 5f);
 	}
+
+    private void SetRotationInstantly() {
+        transform.rotation = Quaternion.LookRotation(forwardValue) * Quaternion.Euler(xRotation, 0f, 0f);
+    }
 
 	private void BeginRolling() {
 		state = 1;
@@ -170,6 +180,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	private void DoGroundAction() {
+        xRotation += Time.deltaTime * rb.velocity.magnitude * 10f;
 		groundActionTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
 
@@ -195,6 +206,9 @@ public class PlayerController : MonoBehaviour {
 		groundActionTimer = 0f;
 		groundAction = false;
         groundActionReady = true;
+
+        xRotation = 0f;
+        SetRotationInstantly();
         
         c.material = slippery;
         //rotationSpeed = slowRotation;
@@ -202,6 +216,7 @@ public class PlayerController : MonoBehaviour {
         if (grounded && jumpTimer <= 0f)
         {
             rb.AddForce((transform.up + transform.forward).normalized * (actionJumpPower * Mathf.Min(hopPower, 1f)), ForceMode.Impulse);
+            jumpParticles.Play();
         }
         
 	}
