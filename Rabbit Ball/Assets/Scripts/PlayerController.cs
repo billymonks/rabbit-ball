@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float turnAmount = 0;
-		turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed;
+		turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed + Input.GetAxis("Horizontal") * 2f;
 		cameraRotationY += turnAmount;
 		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
 

@@ -27,20 +27,24 @@ public class GameCameraController : MonoBehaviour {
             float verticalMouseChange = Input.GetAxis("Mouse Y") * mouseSpeed * 0.5f;
             yHeight = Mathf.Clamp(yHeight - verticalMouseChange, minYHeight, maxYHeight);
 
+
             Vector3 lookAtVector = (target.transform.position - transform.position).normalized;
             //transform.LookAt (target.transform);
-            Vector3 destinationPos = target.transform.position - ((target.forwardValue + transform.forward) / 2f) * targetDistance + Vector3.up * yHeight;
-
+            Vector3 destinationPos = target.transform.position - ((target.forwardValue)) * targetDistance + Vector3.up * yHeight;
+            //Debug.DrawLine(destinationPos, destinationPos + Vector3.up, Color.blue);
             float distanceFromTarget = Vector3.Distance(transform.position, destinationPos);
             float cameraMovementSpeed = (distanceFromTarget / speedScaler) * followSpeed;
 
             transform.position = Vector3.Lerp(transform.position, destinationPos, Time.deltaTime * cameraMovementSpeed);
-            Plane xz = new Plane(transform.right, transform.position);
-            Vector3 targetPoint = target.transform.position + target.forwardValue * (rb.velocity.magnitude / 4f) + Vector3.up * 2f;
-            float distance = xz.GetDistanceToPoint(targetPoint);
-            transform.position += transform.right * distance;
-            
-            transform.LookAt(targetPoint);
+            //Plane xz = new Plane(transform.right, transform.position);
+            //Vector3 targetPoint = target.transform.position + target.forwardValue * (rb.velocity.magnitude / 4f) + target.transform.up * 2f;
+            //float distance = xz.GetDistanceToPoint(targetPoint);
+            //transform.position += transform.right * distance;
+
+            //Debug.DrawLine(transform.position, targetPoint, Color.magenta);
+
+            //transform.LookAt(targetPoint);
+            transform.LookAt(target.transform);
 
             RaycastHit hit;
 			Ray r = new Ray (target.transform.position, transform.position - target.transform.position);
