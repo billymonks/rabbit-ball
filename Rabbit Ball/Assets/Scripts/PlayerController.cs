@@ -76,10 +76,18 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //print(Quaternion.LookRotation(forwardValue, Vector3.up).eulerAngles.x);
 		float turnAmount = 0;
-		turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed + Input.GetAxis("Horizontal") * 2f;
+
+        //cameraRotationX = cameraRigTransform.eulerAngles.x;
+        //float cameraYDiff = Quaternion.LookRotation(forwardValue, Vector3.up).eulerAngles.x - cameraRotationX;
+        //print(cameraYDiff);
+        //print(Quaternion.FromToRotation(Vector3.zero, forwardValue).eulerAngles.x);
+        //print(Quaternion.LookRotation(forwardValue));
+        turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed + Input.GetAxis("Horizontal") * 2f;
 		cameraRotationY += turnAmount;
 		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
+        //cameraRigTransform.RotateAround(body.transform.position, Vector3.right, cameraYDiff);
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
@@ -97,7 +105,7 @@ public class PlayerController : MonoBehaviour {
             if (Physics.Raycast(down, out hit, 0.7f))
             {
                 grounded = true;
-                //rotationSpeed = fastRotation;
+                rotationSpeed = fastRotation;
                 transform.eulerAngles = new Vector3( Mathf.Lerp(transform.eulerAngles.x, 0, Time.deltaTime * 4f), transform.eulerAngles.y, transform.eulerAngles.z);
             }
         }
@@ -130,15 +138,15 @@ public class PlayerController : MonoBehaviour {
         if ((transform.position - prevPos).magnitude > 1) {
 			forwardValue = Vector3.Lerp(forwardValue, 
 				(transform.position - prevPos).normalized, 
-				cameraTurnSpeed * Time.deltaTime);
+                                        cameraTurnSpeed * Time.deltaTime).normalized;
 
-            forwardValue = Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue;
+            forwardValue = (Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue).normalized;
 
             prevPos = transform.position;
 		} else
         {
             xRotation = 0f;
-            forwardValue = Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue;
+            forwardValue = (Quaternion.AngleAxis(rotation * 3f, transform.up) * forwardValue).normalized;
 
         }
 
