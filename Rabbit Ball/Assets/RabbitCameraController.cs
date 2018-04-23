@@ -50,7 +50,7 @@ public class RabbitCameraController : MonoBehaviour {
             lookAheadDistance = lookAheadDistance = Mathf.Lerp(lookAheadDistance, 4f, Time.deltaTime);
         }
 
-        print(Mathf.Abs(posDiff.y));
+        //print(Mathf.Abs(posDiff.y));
         if (Mathf.Abs(posDiff.y) > 1.2f) {
             changedCameraRigXRotation = Mathf.Lerp(cameraRigXRotation, Mathf.Clamp(cameraRigXRotation - posDiff.y * 1f, -40f, 70f), Time.deltaTime * 4f);
             cameraRigXRotationChange = changedCameraRigXRotation - cameraRigXRotation;
@@ -65,7 +65,7 @@ public class RabbitCameraController : MonoBehaviour {
         //cameraRig.eulerAngles.Set(cameraRigXRotation, cameraRig.eulerAngles.y, cameraRig.eulerAngles.z);
         cameraRig.Rotate(Vector3.right, cameraRigXRotationChange);
         //print(cameraRig.eulerAngles);
-        print(player.forwardValue.normalized);
+        //print(player.forwardValue.normalized);
         //transform.LookAt(cameraRig.transform.position + player.forwardValue.normalized * lookAheadDistance);
         transform.LookAt(cameraRig.transform.position + cameraRig.forward * lookAheadDistance);
 

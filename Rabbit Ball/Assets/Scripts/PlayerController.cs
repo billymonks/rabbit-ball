@@ -53,15 +53,19 @@ public class PlayerController : MonoBehaviour {
     private float jumpTimer;
     private float jumpValidTime = 0.4f;
 
-    public ParticleSystem jumpParticles;
+    public ParticleSystem jumpParticles, rollParticles;
 
     private float xRotation = 0f;
 
+    private Transform particleHolder;
+
+    private ParticleSystem.EmissionModule rollEmitter;
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
 		prevPos = transform.position;
 		forwardValue = transform.forward;
+        particleHolder = jumpParticles.transform.parent;
 
 		startPos = transform.position;
 
@@ -72,22 +76,22 @@ public class PlayerController : MonoBehaviour {
         cameraRotationY = cameraRigTransform.eulerAngles.y;
 
         jumpTimer = jumpValidTime;
+
+        rollEmitter = rollParticles.emission;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //print(Quaternion.LookRotation(forwardValue, Vector3.up).eulerAngles.x);
 		float turnAmount = 0;
 
-        //cameraRotationX = cameraRigTransform.eulerAngles.x;
-        //float cameraYDiff = Quaternion.LookRotation(forwardValue, Vector3.up).eulerAngles.x - cameraRotationX;
-        //print(cameraYDiff);
-        //print(Quaternion.FromToRotation(Vector3.zero, forwardValue).eulerAngles.x);
-        //print(Quaternion.LookRotation(forwardValue));
+        particleHolder.position = transform.position;
+        particleHolder.rotation = Quaternion.LookRotation(forwardValue, Vector3.up);
+
         turnAmount = Input.GetAxis ("Mouse X") * mouseSpeed + Input.GetAxis("Horizontal") * 2f;
 		cameraRotationY += turnAmount;
 		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
-        //cameraRigTransform.RotateAround(body.transform.position, Vector3.right, cameraYDiff);
+
+
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
@@ -124,7 +128,16 @@ public class PlayerController : MonoBehaviour {
 				if (groundAction)
 					DoGroundAction ();
                 else
-                    transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 10f);
+                    transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 4f);
+        }
+
+        if (grounded)
+        {
+            rollEmitter.enabled = true;
+        }
+        else
+        {
+            rollEmitter.enabled = false;
         }
 	}
 
@@ -192,7 +205,10 @@ public class PlayerController : MonoBehaviour {
 		groundActionTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
 
-        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
+        //if(rb.velocity.magnitude < 1f)
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
+        //else
+            //transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 16f);
         hopPower += Time.deltaTime;
 
         if (grounded)
@@ -219,6 +235,8 @@ public class PlayerController : MonoBehaviour {
         SetRotationInstantly();
         
         c.material = slippery;
+
+        transform.localScale = new Vector3(1f, 2f, 1f);
         //rotationSpeed = slowRotation;
 
         if (grounded && jumpTimer <= 0f)
