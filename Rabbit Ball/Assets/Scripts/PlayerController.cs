@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public static GameObject player;
 	private int state = 0;
 
 	public Vector3 forwardValue;
@@ -78,6 +79,8 @@ public class PlayerController : MonoBehaviour {
         jumpTimer = jumpValidTime;
 
         rollEmitter = rollParticles.emission;
+
+        player = gameObject;
     }
 	
 	// Update is called once per frame
@@ -91,11 +94,11 @@ public class PlayerController : MonoBehaviour {
 		cameraRotationY += turnAmount;
 		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
 
-
+        Debug.DrawRay(transform.position + Vector3.up * 2f, forwardValue, Color.red);
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
-        if (Physics.Raycast(r, out hit, 0.7f))
+        if (Physics.Raycast(r, out hit, 1f))
         {
             grounded = true;
             rotationSpeed = fastRotation;
@@ -106,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 
             Ray down = new Ray(transform.position, -Vector3.up * 1f);
 
-            if (Physics.Raycast(down, out hit, 0.7f))
+            if (Physics.Raycast(down, out hit, 1f))
             {
                 grounded = true;
                 rotationSpeed = fastRotation;

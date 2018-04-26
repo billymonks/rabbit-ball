@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarrotController : MonoBehaviour {
     public ParticleSystem collectionParticle;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,8 +20,13 @@ public class CarrotController : MonoBehaviour {
         if(other.CompareTag("Player"))
         {
             ParticleSystem ps = GameObject.Instantiate<ParticleSystem>(collectionParticle);
+            //ParticleMover mover = ps.GetComponent<ParticleMover>();
+            //mover.destination = other.transform;
             ps.transform.position = transform.position;
-            GameObject.Destroy(ps, 5f);
+            //ScoreKeeper.carrotCount++;
+            //ScoreKeeper.UpdateCarrotCount(1);
+            ScoreKeeper.keeper.UpdateCarrotCount(1);
+            GameObject.Destroy(ps.gameObject, 5f);
             GameObject.Destroy(gameObject);
 
         }
