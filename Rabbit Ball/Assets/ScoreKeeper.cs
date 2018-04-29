@@ -20,6 +20,7 @@ public class ScoreKeeper : MonoBehaviour {
 
     public void UpdateCarrotCount(int count) {
         carrotCount += count;
+        carrotCount = Mathf.Max(carrotCount, 0);
         carrotCountUi.text = carrotCount.ToString();
     }
 }

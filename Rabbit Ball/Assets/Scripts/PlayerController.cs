@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour {
     private Transform particleHolder;
 
     private ParticleSystem.EmissionModule rollEmitter;
+
+    private float hurtTimer = 0f;
+    public float hurtTime = 2f;
+
+    private bool rolling = false;
 	// Use this for initialization
 	void Start () {
         transform = body.transform;
@@ -94,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 		cameraRotationY += turnAmount;
 		cameraRigTransform.RotateAround(body.transform.position, Vector3.up, turnAmount);
 
-        Debug.DrawRay(transform.position + Vector3.up * 2f, forwardValue, Color.red);
+        //Debug.DrawRay(transform.position + Vector3.up * 2f, forwardValue, Color.red);
 
         Ray r = new Ray(transform.position, -transform.up * 1f);
         RaycastHit hit;
@@ -132,6 +137,12 @@ public class PlayerController : MonoBehaviour {
 					DoGroundAction ();
                 else
                     transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 4f);
+        } else if (state == 2) { //hurt
+            hurtTimer -= Time.deltaTime;
+            if (hurtTimer <= 0f){
+                hurtTimer = 0f;
+                Recover();
+            }
         }
 
         if (grounded)
@@ -143,6 +154,11 @@ public class PlayerController : MonoBehaviour {
             rollEmitter.enabled = false;
         }
 	}
+
+    private void Recover() {
+        rb.freezeRotation = true;
+        state = 0;
+    }
 
 	private void UpdateForwardFromMovement() {
         float yRotation = transform.eulerAngles.y;
@@ -208,19 +224,22 @@ public class PlayerController : MonoBehaviour {
 		groundActionTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
 
-        //if(rb.velocity.magnitude < 1f)
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
-        //else
-            //transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 16f);
+        if (rb.velocity.magnitude > 1)
+            rolling = true;
+        else
+            rolling = false;
+
+        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 4f);
+
         hopPower += Time.deltaTime;
 
         if (grounded)
         {
-            //rotationSpeed = fastRotation;
+            
         }
         else
         {
-            //rotationSpeed = slowRotation;
+            
             rb.AddForce(Vector3.down * Time.deltaTime * 4f, ForceMode.Impulse);
         }
             
@@ -241,6 +260,8 @@ public class PlayerController : MonoBehaviour {
 
         transform.localScale = new Vector3(1f, 2f, 1f);
         //rotationSpeed = slowRotation;
+
+        rolling = false;
 
         if (grounded && jumpTimer <= 0f)
         {
@@ -269,6 +290,8 @@ public class PlayerController : MonoBehaviour {
                 //transform.rotation = transform.rotation * Quaternion.FromToRotation(transform.up, c.contacts[0].normal);
             }
         }
+
+
     }
 
     void OnCollisionExit(Collision c)
@@ -278,5 +301,21 @@ public class PlayerController : MonoBehaviour {
             //foreach (ContactPoint cp in c.contacts)
                 //contacts.Remove(cp);
         //}
+    }
+
+    void TakeDamage(EnemyHitInfos hit) {
+        if(rolling) {
+            hit.attacker.SendMessage("Hit");
+        } else {
+            rb.freezeRotation = false;
+            transform.localScale = Vector3.one;
+            rb.AddForceAtPosition(hit.hitDirection * hit.force, hit.hitPoint, ForceMode.VelocityChange);
+            ScoreKeeper.keeper.UpdateCarrotCount(-hit.carrotLoss);
+            state = 2;
+            hurtTimer = hurtTime;
+            //Todo: Spawn dropped carrot pickups in random directions
+        }
+
+
     }
 }
